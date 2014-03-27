@@ -1,0 +1,70 @@
+#!/usr/bin/python
+#!encoding:UTF-8
+import sys
+import modulo
+  
+argumentos = sys.argv[1:]
+if (len(argumentos) == 8):
+  n = int (argumentos[0])
+  aproximaciones = int (argumentos[1])
+  umbral = []
+  for i in range (2,7):
+    umbral.append(float(argumentos[i]))
+  nombre_fichero = argumentos[7]
+else:
+  print "Introduzca el número de intervalos (n>0):"
+  n = int (raw_input());
+  print "Introduzca el número de aproximaciones:"
+  aproximaciones = int (raw_input());
+  print "INtroduzca 5 umbrales de error: "
+  umbral = []
+  for i in range (5):
+    print "Introduzca el umbral", i, ":"
+    umbral.append(float (raw_input());
+  print "Introduzca el nombre del fichero para almacenar los resultados:"
+  nombre_fichero = raw_input();
+if (n>0):
+  try:
+    fichero = open (nombre_fichero, "a")
+  except:
+    fichero = open (nombre_fichero, "n")
+  fichero.write ("Nº de intervalos: %d\n" % (aproximaciones))
+  for i in range (5):
+    porcentaje = modulo.error (n, aproximaciones, umbral[i])
+    fichero.write ("%2.2f%% de fallos para el umbral %2.5f\n" % (porcentaje, umbral[i]))
+  fichero.close ()
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  PI35DT = 3.1415926535897931159979634685441852
+  intervalo = n
+  lista = []
+  for i in range (aproximaciones):
+    valor = calcular_pi (intervalo)
+    lista.append (valor)
+    intervalo += n
+  print lista
+  diferencia = []
+  for i in range (aproximaciones):
+    dif = abs (PI35DT - lista[i])
+    diferencia.append (dif)
+  print "i\tPI35DT\tlista i\tPI35DT - lista i"
+  for i in range (aproximaciones):
+    print "%d\t%1.10f\t%1.10f\t%1.10f" % (i+1,PI35DT,lista[i],diferencia[i])
+  #print "El valor de PI con 35 decimales es: %10.35f", % PI35
+else:
+    print "El valor de los intervalos debe ser positivo"
